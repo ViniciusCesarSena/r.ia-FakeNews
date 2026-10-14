@@ -1,3 +1,11 @@
+FROM node:22-alpine AS frontend-build
+
+WORKDIR /frontend
+COPY frontend/verificador_artigos/package.json frontend/verificador_artigos/package-lock.json ./
+RUN npm ci
+COPY frontend/verificador_artigos ./
+RUN npm run build
+
 FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -5,7 +13,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONPATH=/app/src \
     APP_ENV=docker \
     SERVICE_NAME=fatofake \
-    LOG_FILE=/var/log/fatofake/app.jsonl
+    LOG_FILE=/var/log/fatofake/app.jsonl \
+    FRONTEND_DIST_DIR=/app/frontend-dist
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -y libglib2.0-0 libgl1 poppler-utils \
@@ -18,6 +27,7 @@ RUN pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu 
 
 COPY src ./src
 COPY run_acceptance_app.py ./
+COPY --from=frontend-build /frontend/dist ./frontend-dist
 
 RUN useradd --create-home --uid 10001 fatofake \
     && mkdir -p /var/log/fatofake /var/lib/fatofake /home/fatofake/.cache/huggingface \

@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 from html import escape
+import os
+from pathlib import Path
 
-from flask import Flask, Response
+from flask import Flask, Response, send_from_directory
 
 
 WEB_UI_HTML = r"""<!doctype html>
@@ -2059,7 +2061,25 @@ def register_web_ui(
     """Registra a página sem acoplar a interface ao pipeline científico."""
 
     rendered = WEB_UI_HTML.replace("__MODE_LABEL__", escape(mode_label))
+    configured_dist = os.getenv("FRONTEND_DIST_DIR", "").strip()
+    frontend_dist = Path(configured_dist) if configured_dist else None
+    frontend_index = frontend_dist / "index.html" if frontend_dist else None
+    use_react_frontend = bool(frontend_index and frontend_index.is_file())
 
     @app.get("/")
     def index() -> Response:
+        if use_react_frontend and frontend_dist is not None:
+            return send_from_directory(frontend_dist, "index.html")
         return Response(rendered, mimetype="text/html")
+
+    @app.get("/assets/<path:filename>")
+    def react_asset(filename: str) -> Response:
+        if not use_react_frontend or frontend_dist is None:
+            return Response(status=404)
+        return send_from_directory(frontend_dist / "assets", filename)
+
+    @app.get("/robots.txt")
+    def react_robots() -> Response:
+        if not use_react_frontend or frontend_dist is None:
+            return Response("User-agent: *\nDisallow: /\n", mimetype="text/plain")
+        return send_from_directory(frontend_dist, "robots.txt")
