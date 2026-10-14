@@ -27,3 +27,10 @@ HYBRID_RETRIEVAL_ENABLED=false
 O armazenamento local do plano Consumption é temporário. O histórico resumido
 do usuário continua no Firestore; análises em andamento podem ser perdidas se a
 réplica for encerrada ou substituída.
+
+## Assinaturas sem ACR Tasks
+
+Algumas assinaturas Azure for Students não permitem builds com ACR Tasks. O
+workflow `publish-container.yml` constrói a imagem no GitHub Actions e publica
+`ghcr.io/ViniciusCesarSena/artfact:latest`. Nesse caso, configure o pacote como
+público no GitHub e implante a imagem pronta com `az containerapp up --image`.
