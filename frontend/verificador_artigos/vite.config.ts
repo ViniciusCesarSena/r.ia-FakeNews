@@ -11,7 +11,8 @@ export default defineConfig(({ mode }) => {
   // .figma/make/deploy-preview passes `--mode development` for cached-preview builds.
   const emitSourcemaps = mode === 'development'
   const env = loadEnv(mode, process.cwd(), '')
-  const proxy = { '/api': { target: env.API_PROXY_TARGET || 'http://127.0.0.1:5000', changeOrigin: true, timeout: 120000, proxyTimeout: 120000 } }
+  const proxyTarget = process.env.API_PROXY_TARGET || env.API_PROXY_TARGET || 'http://127.0.0.1:5000'
+  const proxy = { '/api': { target: proxyTarget, changeOrigin: true, timeout: 120000, proxyTimeout: 120000 } }
 
   return {
     base: process.env.FIGMA_PUBLIC_URL ? `${process.env.FIGMA_PUBLIC_URL}/` : '/',

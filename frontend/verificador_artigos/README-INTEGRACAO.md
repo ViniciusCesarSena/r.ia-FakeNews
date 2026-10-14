@@ -65,3 +65,40 @@ npm run build
 ```
 
 O GitHub Actions também executa estes passos. Não substitui testes de artigos reais com PubMed/Gemini nem a revisão científica humana.
+
+## Deploy no Railway
+
+Crie dois serviços no mesmo projeto Railway, ambos apontando para este repositório e para a mesma branch:
+
+### Backend
+
+- Nome do serviço: `backend`
+- Root Directory: `/`
+- Builder: Dockerfile (o Railway detecta o `Dockerfile` da raiz)
+- Healthcheck Path: `/api/v1/health`
+- Variáveis mínimas:
+
+```dotenv
+GEMINI_API_KEY=sua_chave
+NCBI_EMAIL=seu_email
+JOB_DATABASE_PATH=/var/lib/fatofake/analysis-jobs-pubmed.sqlite3
+LOG_FILE=/var/log/fatofake/app.jsonl
+```
+
+Para manter análises após redeploys, anexe um volume em `/var/lib/fatofake`. Como volumes Railway são montados como `root` e a imagem usa um usuário sem privilégios, adicione também `RAILWAY_RUN_UID=0` ao usar o volume.
+
+### Frontend
+
+- Nome do serviço: `frontend`
+- Root Directory: `/frontend/verificador_artigos`
+- Builder: Dockerfile (o Railway detecta o `Dockerfile` dessa pasta)
+- Healthcheck Path: `/`
+- Variável:
+
+```dotenv
+API_PROXY_TARGET=http://${{backend.RAILWAY_PRIVATE_DOMAIN}}:${{backend.PORT}}
+```
+
+Gere domínio público somente para o serviço `frontend`. O navegador usa `/api/v1` no mesmo domínio; o proxy Vite encaminha as chamadas para o backend pela rede privada do Railway.
+
+Depois de gerar o domínio do frontend, autorize-o em **Firebase Console → Authentication → Settings → Authorized domains** para o login funcionar.
