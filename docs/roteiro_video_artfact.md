@@ -2,17 +2,18 @@
 
 **Duração estimada:** 4min30s a 5min
 **Formato:** gravação de tela da aplicação + falas dos integrantes
-**Divisão sugerida:** 5 integrantes, com aproximadamente 45 a 60 segundos para cada um.
+**Divisão sugerida:** 6 integrantes, com aproximadamente 35 a 50 segundos para cada um.
 
 > Substituam “Pessoa 1”, “Pessoa 2” etc. pelos nomes dos integrantes. Todos devem aparecer ou participar com voz identificada.
 
 ### Divisão dos participantes
 
-1. **Pessoa 1:** contexto e problema; principais desafios.
+1. **Pessoa 1:** contexto e problema.
 2. **Pessoa 2:** produto, solução e demonstração da interface.
 3. **Pessoa 3:** pipeline de IA — entrada, preparação da busca e fontes.
 4. **Pessoa 4:** pipeline de IA — recuperação, Gemini e explicabilidade.
-5. **Pessoa 5:** tecnologias, execução com Docker e conclusão.
+5. **Pessoa 5:** tecnologias, execução com Docker e principais desafios.
+6. **Pessoa 6:** conclusão e resultados.
 
 ---
 
@@ -151,7 +152,7 @@ Mostrar:
 
 ---
 
-### Pessoa 1 — Principais desafios
+### Pessoa 5 — Principais desafios
 
 **Fala:**
 
@@ -165,7 +166,7 @@ Mostrar:
 
 # 4:35–5:00 — Conclusão e resultados
 
-## Pessoa 5 — Encerramento
+## Pessoa 6 — Encerramento
 
 **Fala:**
 
