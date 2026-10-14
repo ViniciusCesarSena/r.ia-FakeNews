@@ -1,12 +1,22 @@
 # Roteiro do vídeo — artfact
 
-**Duração estimada:** 4min30s a 5min**Formato:** gravação de tela da aplicação + falas dos integrantes**Divisão sugerida:** 4 integrantes, aproximadamente 1 minuto para cada um.
+**Duração estimada:** 4min30s a 5min
+**Formato:** gravação de tela da aplicação + falas dos integrantes
+**Divisão sugerida:** 5 integrantes, com aproximadamente 45 a 60 segundos para cada um.
 
 > Substituam “Pessoa 1”, “Pessoa 2” etc. pelos nomes dos integrantes. Todos devem aparecer ou participar com voz identificada.
 
+### Divisão dos participantes
+
+1. **Pessoa 1:** contexto e problema; principais desafios.
+2. **Pessoa 2:** produto, solução e demonstração da interface.
+3. **Pessoa 3:** pipeline de IA — entrada, preparação da busca e fontes.
+4. **Pessoa 4:** pipeline de IA — recuperação, Gemini e explicabilidade.
+5. **Pessoa 5:** tecnologias, execução com Docker e conclusão.
+
 ---
 
-## 0:00–0:45 — Contexto e problema
+## 0:00–0:40 — Contexto e problema
 
 ### Pessoa 1 — Contexto
 
@@ -29,7 +39,7 @@ Mostrar:
 
 ---
 
-## 0:45–1:30 — Produto e solução
+## 0:40–1:20 — Produto e solução
 
 ### Pessoa 2 — Apresentação da aplicação
 
@@ -59,9 +69,9 @@ Demonstrar:
 
 ---
 
-# 1:30–3:35 — Pipeline de IA em formato de receita
+# 1:20–3:35 — Pipeline de IA em formato de receita
 
-## Pessoa 3 — Receita do pipeline: da alegação aos artigos
+## Pessoa 3 — Receita do pipeline: entrada e busca
 
 **Fala:**
 
@@ -121,9 +131,9 @@ Mostrar:
 
 ---
 
-# 3:35–4:20 — Tecnologias utilizadas
+# 3:35–4:35 — Tecnologias e principais desafios
 
-## Pessoa 1 ou Pessoa 3
+## Pessoa 5 — Tecnologias utilizadas
 
 **Fala:**
 
@@ -141,9 +151,7 @@ Mostrar:
 
 ---
 
-# 4:20–4:50 — Principais desafios
-
-## Pessoa 2
+### Pessoa 1 — Principais desafios
 
 **Fala:**
 
@@ -152,16 +160,12 @@ Mostrar:
 > Outro desafio foi permitir que o usuário tivesse controle sobre o processo. Por isso, o artfact não investiga automaticamente todas as alegações sem revisão: o usuário pode editar, adicionar, selecionar ou remover alegações antes da busca.
 >
 > Também foi necessário tratar falhas de rede, indisponibilidade do Gemini, limites das APIs e diferenças entre artigos em português e inglês.”
->
-> ```
->
-> ```
 
 ---
 
-# 4:50–5:00 — Conclusão e resultados
+# 4:35–5:00 — Conclusão e resultados
 
-## Pessoa 4 — Encerramento
+## Pessoa 5 — Encerramento
 
 **Fala:**
 
