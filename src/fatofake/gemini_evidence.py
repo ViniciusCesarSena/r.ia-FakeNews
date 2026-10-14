@@ -359,6 +359,12 @@ class GeminiEvidenceAnalyzer:
                     f"{self.max_attempts} tentativas (HTTP {last_error.code}). "
                     "Tente novamente em alguns instantes."
                 ) from last_error
+            if isinstance(last_error, HTTPError) and last_error.code in {401, 403}:
+                raise GeminiAnalysisError(
+                    "A chave da API Gemini foi recusada "
+                    f"(HTTP {last_error.code}). Atualize GEMINI_API_KEY no arquivo .env "
+                    "e reinicie a aplicação."
+                ) from last_error
             raise GeminiAnalysisError(f"Falha ao consultar o Gemini: {last_error}") from last_error
         if not isinstance(result, dict):
             raise GeminiAnalysisError("O Gemini retornou uma resposta inesperada.")
